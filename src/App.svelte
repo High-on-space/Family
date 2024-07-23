@@ -1,30 +1,46 @@
 <script>
-	export let name;
+	import { onMount } from "svelte";
+	import { fly } from 'svelte/transition'
+	import { fade } from 'svelte/transition'
+	let begin=false
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<div class='container'>
+	{#if !begin}
+		<button class='start' on:click = {() => begin=!begin} transition:fade>
+			Bắt đầu
+		</button>
+	{:else}
+		<div class='bar' transition:fly={{duration:1500, x:-200}}>
+
+		</div>
+	{/if}
+</div>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+	.container
+	{
+		width: 100vw;
+		height: 100vh;
+		max-width: 100%;
+		display: flex;
+		justify-content: center;
 	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	.start
+	{
+		padding:0;
+		margin-top:75vh;
+		margin-bottom:15vh;
+		width: 200px;
 	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	.bar
+	{
+		width:20vw;
+		height: 100vh;
+		max-width: 100%;
+		position: absolute;
+		background-color: red;
+		left:0
 	}
+	
 </style>
